@@ -1,5 +1,5 @@
 # AdventOfRust2021
-Solving [Advent of Code 2021](https://adventofcode.com/2021/about) problems in Rust! This is the second year I've participated in Advent of Code and I'd highly trying to solve the puzzles on your own before viewing this repo!
+Solving [Advent of Code 2021](https://adventofcode.com/2021/about) problems in Rust! This is the second year I've participated in Advent of Code and I'd highly suggest trying to solve the puzzles on your own before viewing this repo!
 
 ## Running Exercises
 To run a specific exercise, run `cargo run --example <ex_name>`.
