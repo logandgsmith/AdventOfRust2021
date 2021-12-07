@@ -1,7 +1,7 @@
-// Advent of Code Day 4 Part 1 (12/04/21)
+// Advent of Code Day 4 Part 2 (12/06/21)
 // Written in Rust!
 // Author: Logan D.G. Smith
-// NOTE: This needs a LOT of optimization. It did teach me a lot about borrowing though.
+// NOTE: Did not become more optimized. Only continued to process boards after the first.
 
 use advent_of_rust_2021::*;
 
@@ -36,7 +36,8 @@ impl Space {
 struct BingoBoard {
     rows: i32,
     row_length: i32,
-    board: Vec<Space>
+    board: Vec<Space>,
+    is_complete: bool
 }
 
 impl BingoBoard {
@@ -45,7 +46,8 @@ impl BingoBoard {
         BingoBoard {
             rows: 0,
             row_length: 5, // NOTE: Hardcoded, but can adjust later if desired
-            board: Vec::new()
+            board: Vec::new(),
+            is_complete: false
         }
     }
 
@@ -63,6 +65,12 @@ impl BingoBoard {
 
     // Check if board has a specified number
     pub fn check(&mut self, checked_num: i32) -> i32 {
+        // Don't evaluate complete boards
+        if self.is_complete {
+            return 0;
+        }
+
+        // Check for bingos
         match self.board.iter().position(|x| x.value == checked_num) {
             Some(position) => {
                 let element = &mut self.board[position];
@@ -74,7 +82,7 @@ impl BingoBoard {
     }
 
     // Check for vertical or horizonal bingos
-    pub fn bingo(&self, row: i32, col: i32, checked_num: i32) -> i32 {
+    pub fn bingo(&mut self, row: i32, col: i32, checked_num: i32) -> i32 {
         // Declarations
         let mut is_horizontal_bingo: bool = true;
         let mut is_vertical_bingo: bool = true;
@@ -92,6 +100,7 @@ impl BingoBoard {
         // Return Bingo
         if is_horizontal_bingo || is_vertical_bingo {
             //println!("{:?}", self.board);
+            self.is_complete = true;
             let total_uncalled = self.find_uncalled();
             return checked_num * total_uncalled;
         }
@@ -114,6 +123,7 @@ impl BingoBoard {
         self.board.iter().filter(|s| s.col == col).collect()
     }
 
+    // Calculates the sum of all uncalled spaces on a board
     fn find_uncalled(&self) -> i32 {
         let mut total: i32 = 0;
         //println!("Board: {:?}", self.board);
@@ -179,7 +189,6 @@ fn main() {
             if score > 0 {
                 println!("Winning Number: {}", called);
                 println!("Winning Board Score: {}", score);
-                return;
             }
         }
     }
