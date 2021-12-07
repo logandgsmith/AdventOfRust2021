@@ -7,7 +7,6 @@ use advent_of_rust_2021::*;
 fn main() {
     // Declarations
     let mut prev:i32 = -1;
-    let mut curr:i32 = -1;
     let mut inc_count:i32 = 0;
 
     // Obtain an iterator for the input file
@@ -16,7 +15,7 @@ fn main() {
         for line in lines {
             if let Ok(entry) = line {
                 // Parse input line
-                curr = match entry.parse::<i32>() {
+                let curr = match entry.parse::<i32>() {
                     Ok(parsed_int) => parsed_int,
                     Err(_) => {
                         println!("Failed to parse line.");

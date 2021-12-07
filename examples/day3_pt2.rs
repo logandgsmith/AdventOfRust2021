@@ -1,4 +1,4 @@
-// Advent of Code Day 2 Part 3 (12/03/21)
+// Advent of Code Day 3 Part 2 (12/06/21)
 // Written in Rust!
 // Author: Logan D.G. Smith
 

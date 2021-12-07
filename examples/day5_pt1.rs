@@ -7,7 +7,6 @@
 use advent_of_rust_2021::*;
 
 // Packages
-use regex::Regex;
 use itertools::Itertools;
 
 // Standard Library
